@@ -1,1 +1,11 @@
+#!/bin/sh
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
 
+clear
+echo "================================="
+echo "  Bem-vindo ao Carlinho Linux!   "
+echo "================================="
+
+exec /bin/sh
