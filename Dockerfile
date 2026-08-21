@@ -26,7 +26,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     lightdm lightdm-gtk-greeter guvcview eog gnome-clocks mpv feh \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -s /bin/bash carlinho \
+RUN groupadd -f netdev \
+    && useradd -m -s /bin/bash carlinho \
     && echo "carlinho:1234" | chpasswd \
     && usermod -aG sudo,video,audio,netdev carlinho
 
