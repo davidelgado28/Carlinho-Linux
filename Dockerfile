@@ -14,6 +14,7 @@ RUN wget -qO- https://microsoft.com | gpg --dearmor > /usr/share/keyrings/packag
     && echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://microsoft.com stable main" > /etc/apt/sources.list.d/vscode.list \
     && wget -qO- https://google.com | gpg --dearmor > /usr/share/keyrings/google-chrome.gpg \
     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://google.com stable main" > /etc/apt/sources.list.d/google-chrome.list
+    
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     xserver-xorg-video-intel xserver-xorg-video-amdgpu \
