@@ -1,0 +1,26 @@
+name: Build Carlinho Linux ISO
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Baixar código do repositório
+      uses: actions/checkout@v4
+
+    - name: Dar permissão de execução aos scripts
+      run: chmod +x scripts/*.sh scripts/build/base/*.sh 2>/dev/null || true
+
+    - name: Compilar a ISO com Docker
+      run: ./scripts/make_with_docker.sh
+
+    - name: Disponibilizar a ISO para Download
+      uses: actions/upload-artifact@v4
+      with:
+        name: carlinho-linux-iso
+        path: carlinho-linux.iso
