@@ -32,6 +32,7 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl-ssl.google.com/usr/bin/linux/chrome/ deb main" > /etc/apt/sources.list.d/google-chrome.list
 
 RUN apt-get update && apt-get install -y \
+    # Apps
     google-chrome-stable \
     code \
     mousepad \
@@ -50,6 +51,20 @@ RUN apt-get update && apt-get install -y \
     feh \
     network-manager-gnome \
     pavucontrol \
+    # Drivers e Firmware de Hardware
+    linux-firmware \
+    xserver-xorg-video-intel \
+    xserver-xorg-video-amdgpu \
+    mesa-vulkan-drivers \
+    mesa-utils \
+    # Servidor de Áudio
+    pipewire \
+    wireplumber \
+    pipewire-audio \
+    pulseaudio-utils \
+    # Gerenciamento de Rede e Comunicação Interna
+    dbus \
+    network-manager \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/bash carlinho \
