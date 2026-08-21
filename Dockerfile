@@ -10,12 +10,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     debootstrap sudo gpg x11-xserver-utils software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO- https://microsoft.com | gpg --dearmor > /usr/share/keyrings/packages.microsoft.gpg \
-    && echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://microsoft.com stable main" > /etc/apt/sources.list.d/vscode.list \
-    && wget -qO- https://google.com | gpg --dearmor > /usr/share/keyrings/google-chrome.gpg \
-    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://google.com stable main" > /etc/apt/sources.list.d/google-chrome.list
+RUN mkdir -p /usr/share/keyrings \
+    && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/packages.microsoft.gpg \
+    && echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list \
+    && wget -qO- https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
     
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     xserver-xorg-video-intel xserver-xorg-video-amdgpu \
     xserver-xorg-video-ati mesa-vulkan-drivers mesa-utils \
