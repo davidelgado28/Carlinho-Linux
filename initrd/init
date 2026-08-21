@@ -1,23 +1,28 @@
 #!/bin/sh
 
-# 1. Monta os sistemas de arquivos essenciais do Kernel
+# 1. Monta os sistemas de arquivos virtuais do Kernel
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 mount -t devtmpfs devtmpfs /dev
+mkdir -p /dev/pts /dev/shm /run/dbus
+mount -t devpts devpts /dev/pts
 
-# 2. Configura a rede local (Loopback)
+# 2. Configura a rede e o nome do host
+hostname -F /etc/hostname
 ifconfig lo 127.0.0.1 up
 
-# 3. Inicia o barramento do sistema (D-Bus), necessário para a rede e áudio
-mkdir -p /run/dbus
+# 3. Inicia o barramento D-Bus (essencial para interface, som e rede)
 dbus-daemon --system --fork
 
-# 4. Inicia o gerenciador de rede para pegar IP automático via DHCP
+# 4. Inicia os serviços de rede (DHCP automático para Ethernet/Wi-Fi)
 NetworkManager &
 
-# 5. Inicia o áudio
+# 5. Inicia o servidor de som (Pipewire)
 pipewire &
 wireplumber &
 
-# 6. Inicia a interface gráfica e o gerenciador de usuários
+# 6. Aplica a resolução padrão (1920x1080) caso esteja disponível
+xrandr --s 1920x1080 2>/dev/null || true
+
+# 7. Inicia a Tela de Login Gráfica e Gerenciador de Usuários
 exec lightdm
