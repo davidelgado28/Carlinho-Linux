@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN groupadd -f netdev \
     && useradd -m -s /bin/bash carlinho \
     && echo "carlinho:1234" | chpasswd \
-    && usermod -aG sudo,video,audio,netdev carlinho
+    && usermod -aG sudo,video,audio carlinho
 
 RUN mkdir -p /usr/share/backgrounds/ /etc/skel/.config/autostart
 
