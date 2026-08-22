@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-BUSYBOX_VER="1.36.4"
+BUSYBOX_VER="1.36.2"
 wget https://busybox.net/downloads/busybox-${BUSYBOX_VER}.tar.bz2
 tar -xf busybox-${BUSYBOX_VER}.tar.bz2
 cd busybox-${BUSYBOX_VER}
