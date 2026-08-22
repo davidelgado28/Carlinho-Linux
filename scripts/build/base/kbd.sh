@@ -7,5 +7,5 @@ tar -xf kbd-${KBD_VER}.tar.xz
 cd kbd-${KBD_VER}
 
 ./configure --prefix=/usr --disable-vlock --disable-nls
-make
-make DESTDIR="$(pwd)/../../sysroot" install
+make -C src
+make -C src DESTDIR="$(pwd)/../../sysroot" install
