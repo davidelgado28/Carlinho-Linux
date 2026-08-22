@@ -6,6 +6,6 @@ wget https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-${KBD_VER}.tar.xz
 tar -xf kbd-${KBD_VER}.tar.xz
 cd kbd-${KBD_VER}
 
-./configure --prefix=/usr --disable-vlock
-make -j$(nproc)
+./configure --prefix=/usr --disable-vlock --disable-nls
+make
 make DESTDIR="$(pwd)/../../sysroot" install
